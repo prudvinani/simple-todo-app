@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 mongoose
-  .connect(process.env.MONGODB_URL as string) 
+  .connect("mongodb://localhost:27017/todo-app") 
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
