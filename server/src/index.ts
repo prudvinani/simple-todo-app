@@ -12,13 +12,17 @@ if (!MONGO_URL) {
   throw new Error("MONGO_URI is not defined in the environment variables.");
 }
 
-mongoose
-  .connect(MONGO_URL) 
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
-    process.exit(1); // Exit process on failure
-  });
+
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI as string);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+};
+
+connectToDatabase();
 
 const TodoSchema = new mongoose.Schema({
   content: { type: String, required: true },
