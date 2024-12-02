@@ -17,12 +17,10 @@ function App() {
   }, []);
 
 
-  const backendUrl =  "http://localhost:4000"
-  ;
 
   async function fetchTodos() {
     try {
-      const response = await axios.get(`${backendUrl}/todos`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/todos`);
       setAllData(response.data);
     } catch (error) {
       console.error("Unable to fetch todos:", error);
@@ -36,7 +34,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post(`${backendUrl}/todo`, { content });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/todo`, { content });
       setAllData((prev) => [...prev, response.data]);
       setContent("");
     } catch (error) {
@@ -46,7 +44,7 @@ function App() {
 
   async function handleDeleteTodo(id: string) {
     try {
-      await axios.delete(`${backendUrl}/todo/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/todo/${id}`);
       setAllData((prev) => prev.filter((todo) => todo._id !== id));
     } catch (error) {
       console.error("Unable to delete todo:", error);

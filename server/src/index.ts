@@ -4,8 +4,16 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
+
+const MONGO_URL = process.env.MONGO_URI 
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
+if (!MONGO_URL) {
+  throw new Error("MONGO_URI is not defined in the environment variables.");
+}
+
 mongoose
-  .connect("mongodb://localhost:27017/todo-app") 
+  .connect(MONGO_URL) 
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
@@ -92,7 +100,7 @@ app.delete("/todo/:id", async (req: Request, res: Response) => {
   }
 });
 
-const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+const PORTS = process.env.PORT || 4000;
+app.listen(PORTS, () => {
+  console.log(`Server is running at http://localhost:${PORTS}`);
 });
