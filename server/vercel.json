@@ -3,7 +3,7 @@
     "version":2,
     "builds":[
         {
-            "server":"dist/index.js",
+            "src":"index.js",
             "use":"@vercel/node"
         },
         {
