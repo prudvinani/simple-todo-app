@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 
-const MONGO_URL = process.env.MONGO_URI 
+const MONGO_URL = process.env.MONGO_URI || "mongodb+srv://palvaiuser:palvaiprudvi@cluster0.eqkdy.mongodb.net"
 console.log("MONGO_URI:", process.env.MONGO_URI);
 
 if (!MONGO_URL) {
